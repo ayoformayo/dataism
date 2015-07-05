@@ -66,5 +66,8 @@
   },
   "browserify-shim": {
     "jquery": "$"
+  },
+  "scripts": {
+    "postinstall": "gulp"
   }
 }
