@@ -43,7 +43,7 @@
     "npm": "2.12.1"
   },
   "scripts": {
-    "postinstall": "gulp"
+    "postinstall": "gulp build"
   },
   "scripts": {
     "test": "jest"
