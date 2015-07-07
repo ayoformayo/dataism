@@ -43,7 +43,7 @@
     "npm": "2.12.1"
   },
   "scripts": {
-    "test": "jest"
+    "postinstall": "gulp"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/preprocessor.js",
