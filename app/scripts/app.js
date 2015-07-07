@@ -5,7 +5,6 @@ global._ = require('underscore');
 global.$ = global.jQuery = require('jquery');
 global.Router = require('react-router');
 global.Reflux = require('reflux');
-global.mui = require('material-ui');
 global.d3 = require('d3');
 
 
