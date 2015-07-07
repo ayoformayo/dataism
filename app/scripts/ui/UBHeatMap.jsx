@@ -18,7 +18,7 @@ var UBHeatMap = React.createClass({
               .append('svg')
               .attr('height', height)
               .attr('width', width);
-    var scale = width * 0.9
+    var scale = width * 0.9;
     var projection = d3.geo.albersUsa()
         .scale(scale)
         .translate([width / 2, height / 2]);
