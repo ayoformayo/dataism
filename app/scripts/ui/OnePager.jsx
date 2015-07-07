@@ -3,13 +3,13 @@ var PAGES = {
   liquor_licenses: {
     component: require('./liquor_maps.jsx')
   },
-  sankey: {
-    component: require('./sankey.jsx')
-  },
   heat_map: {
     component: require('./UBHeatMap.jsx')
   }
 }
+  // sankey: {
+  //   component: require('./sankey.jsx')
+  // },
 var Router = require('react-router');
 
 module.exports = React.createClass({

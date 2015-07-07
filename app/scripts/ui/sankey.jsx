@@ -299,7 +299,9 @@ var Sankey = React.createClass({
   renderSlack(){
     var containerHeight = $('section').height(),
       containerWidth = $('section').width();
-    var margin = {top: 100, right: 100, bottom: 100, left: 100},
+    var sectionHeight = window.innerHeight;
+    var sectionWidth = window.innerWidth;
+    var margin = {top: sectionHeight * 0.05, right: sectionWidth * 0.05, bottom: sectionHeight * 0.05, left: sectionWidth * 0.05},
         width = containerWidth - margin.left - margin.right,
         height = containerHeight - margin.top - margin.bottom;
 
