@@ -24,7 +24,7 @@ var UBHeatMap = React.createClass({
         .translate([width / 2, height / 2]);
     var path = d3.geo.path()
         .projection(projection);
-    d3.xhr('http://localhost:3000/maps/ub_heat_map.json', (err, success) => {
+    d3.xhr('/maps/ub_heat_map.json', (err, success) => {
       var usBoundaries = JSON.parse(success.response);
       var subunits = topojson.feature(usBoundaries, usBoundaries.objects.units);
       var destination_count = usBoundaries.destination_count;

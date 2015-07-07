@@ -317,7 +317,7 @@ var Sankey = React.createClass({
         .nodePadding(5)
         .size([width, height]);
     var path = sankey.link();
-    d3.xhr("http://localhost:3000/slack.json", function(error, success) {
+    d3.xhr("/slack.json", function(error, success) {
       if (error) return console.error(error);
       var data = JSON.parse(success.response);
       sankey

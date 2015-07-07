@@ -24,7 +24,7 @@ var LiquorMaps = React.createClass({
                      .attr("font-size", "20px")
                      .attr("fill", "red");
 
-    d3.xhr('http://localhost:3000/maps/new_york.json', (error, success) => {
+    d3.xhr('/maps/new_york.json', (error, success) => {
       var newYork;
       var projection = d3.geo.mercator()
                   .center([-73.94, 40.70])
