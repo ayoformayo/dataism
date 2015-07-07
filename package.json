@@ -24,7 +24,6 @@
     "gulp-webserver": "latest",
     "jest-cli": "latest",
     "main-bower-files": "~2.6.2",
-    "material-design-lite": "^1.0.0-3",
     "react": "latest",
     "react-router": "^0.13.3",
     "react-tap-event-plugin": "^0.1.7",
