@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var tap = require('gulp-tap');
 var del = require('del');
 var runSeq = require('run-sequence')
 
