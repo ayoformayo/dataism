@@ -13,7 +13,6 @@ var LiquorMaps = React.createClass({
               .append('svg')
               .attr('height', height)
               .attr('width', width);
-              console.log(110000 / height);
     var scale = height * 92.43697478991596
 
     var textField = svg.append('text')
@@ -39,6 +38,14 @@ var LiquorMaps = React.createClass({
       newYork = JSON.parse(success.response);
       // var stores = JSON.parse(succ.response);
         g.append("g")
+          .attr("id", "boroughs")
+          .selectAll(".state")
+          .data(newYork.features)
+          .enter().append("path")
+          .attr("class", function(d){ return d.properties.name; })
+          .attr("class", 'new-york-unit')
+          .attr("d", path);
+        g.append("g")
           .attr("id", "stores")
           .selectAll(".stores")
           .data(newYork.stores)
@@ -50,14 +57,6 @@ var LiquorMaps = React.createClass({
 
         // path.pointRadius(1)
 
-        g.append("g")
-          .attr("id", "boroughs")
-          .selectAll(".state")
-          .data(newYork.features)
-          .enter().append("path")
-          .attr("class", function(d){ return d.properties.name; })
-          .attr("class", 'new-york-unit')
-          .attr("d", path);
 
         
         

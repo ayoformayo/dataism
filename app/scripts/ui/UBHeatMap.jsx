@@ -28,14 +28,12 @@ var UBHeatMap = React.createClass({
       var usBoundaries = JSON.parse(success.response);
       var subunits = topojson.feature(usBoundaries, usBoundaries.objects.units);
       var destination_count = usBoundaries.destination_count;
-      console.log([destination_count.max.val, destination_count.min.val])
       var blah = d3.scale.linear()
           .domain([destination_count.max.val, destination_count.min.val])
           .range(["white", "red"]);
           // console(blah(÷200))
           // console(blah)
           var ramp=d3.scale.linear().domain([destination_count.max.val,destination_count.min.val]).range(["red","blue"]);
-          console.log(ramp(4))
           
 
 
@@ -43,7 +41,7 @@ var UBHeatMap = React.createClass({
         .data(subunits.features)
         .enter()
         .append('path')
-        .attr('class', (d) => { console.log(d); return 'us-state ' + d.id })
+        .attr('class', (d) => { return 'us-state ' + d.id })
         .style("fill", (d) => { 
           var val = destination_count[d.properties.name] ? destination_count[d.properties.name] : 0
         //   console.log(color); 

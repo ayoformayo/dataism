@@ -166,7 +166,7 @@ gulp.task('watch', ['html', 'fonts', 'bundle'], function() {
         // Note: this uses an unsigned certificate which on first access
         //       will present a certificate warning in the browser.
         // https: true,
-        server: ['public', 'app']
+        server: ['public']
     });
 
     // Watch .json files

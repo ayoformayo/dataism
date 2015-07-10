@@ -2,7 +2,7 @@ $icon-font-path: "../fonts/";
 
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
 @import "heatMap";
-
+@import "./layout/layout";
 
 .app-bar {
     background-color: transparent !important;
@@ -23,7 +23,7 @@ $icon-font-path: "../fonts/";
 }
 
 .new-york-unit {
-    fill: #575757;
+    stroke: white;
     opacity: 0;
 }
 .new-york-store {
