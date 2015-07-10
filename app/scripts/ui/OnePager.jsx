@@ -1,3 +1,4 @@
+React.initializeTouchEvents(true)
 var _ = require('underscore');
 var PAGES = [
   {
@@ -65,6 +66,35 @@ module.exports = React.createClass({
     })
   },
 
+  handleMove(e){
+    // console.log(e.changedTouches[0].clientY)
+    // console.log(e.changedTouches[0].clientY)
+    var lastY = this.lastY;
+    if(!this.moving) {
+      this.moving = true;
+      if(lastY){
+        if(e.changedTouches[0].clientY < lastY){
+          this.moveDown();
+          // console.log('this.moveDown()')
+        }else{
+          this.moveUp()
+          // console.log('this.moveUp()')
+        }
+      }
+
+      this.lastY = e.changedTouches[0].clientY;
+
+      _.delay(() => {
+        this.moving = false; 
+      }, 2000);
+    }else {
+
+      // e.preventDefault();
+      e.stopPropagation();
+      
+    }
+  },
+
   handleScroll(props){
     if(!this.moving) {
       this.moving = true;
@@ -103,8 +133,9 @@ module.exports = React.createClass({
       )
     });
 
+
     return(
-      <div onWheel={this.handleScroll}> 
+      <div onWheel={this.handleScroll} onTouchMove={this.handleMove}> 
         {pages}
       </div>
     )
