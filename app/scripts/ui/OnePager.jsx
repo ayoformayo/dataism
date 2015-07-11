@@ -85,25 +85,28 @@ var OnePager = React.createClass({
   },
 
   onTouchEnd(e){
-    var lastY = this.startY;
-    if(!this.moving) {
-      this.moving = true;
-      if(lastY){
-        if(e.changedTouches[0].clientY < lastY){
-          this.moveDown();
-        }else{
-          this.moveUp()
-        }
-      }
+    // e.preventDefault();
+    //   e.stopPropagation();
+    // var lastY = this.startY;
+    // if(!this.moving) {
+    //   this.moving = true;
+    //   if(lastY){
+    //     if(e.changedTouches[0].clientY < lastY){
+    //       this.moveDown();
+    //     }else{
+    //       this.moveUp()
+    //     }
+    //   }
 
-      this.lastY = e.changedTouches[0].clientY;
+    //   this.lastY = e.changedTouches[0].clientY;
 
-      _.delay(() => {
-        this.moving = false; 
-      }, 2000);
-    }else {
-      e.stopPropagation();
-    }
+    //   _.delay(() => {
+    //     this.moving = false; 
+    //   }, 2000);
+    // }else {
+    // }
+      // e.preventDefault();
+      // e.stopPropagation();
   },
 
   onTouchStart(e){
