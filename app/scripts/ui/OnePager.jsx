@@ -19,7 +19,7 @@ var PAGES = [
 ]
 var Router = require('react-router');
 
-module.exports = React.createClass({
+var OnePager = React.createClass({
   mixins: [ Router.Navigation, Router.State ],
 
   getInitialState() {
@@ -41,8 +41,7 @@ module.exports = React.createClass({
 
       $("html,body").animate(
        {
-           scrollTop: top,
-           // easing: 'easeOutQuint'
+         scrollTop: top,
        }, 2000, 'easeOutExpo');
     })
     
@@ -58,7 +57,6 @@ module.exports = React.createClass({
 
       var anchor = PAGES[index].anchor;
       var top = $this.find(anchor).offset().top;
-      console.log('easeOutQuint');
       $("html,body").animate(
        {
            scrollTop: top,
@@ -66,40 +64,9 @@ module.exports = React.createClass({
     })
   },
 
-  handleMove(e){
-    // console.log(e.changedTouches[0].clientY)
-    // console.log(e.changedTouches[0].clientY)
-    var lastY = this.lastY;
-    if(!this.moving) {
-      this.moving = true;
-      if(lastY){
-        if(e.changedTouches[0].clientY < lastY){
-          this.moveDown();
-          // console.log('this.moveDown()')
-        }else{
-          this.moveUp()
-          // console.log('this.moveUp()')
-        }
-      }
-
-      this.lastY = e.changedTouches[0].clientY;
-
-      _.delay(() => {
-        this.moving = false; 
-      }, 2000);
-    }else {
-
-      // e.preventDefault();
-      e.stopPropagation();
-      
-    }
-  },
-
   handleScroll(props){
     if(!this.moving) {
       this.moving = true;
-
-
         if (props.deltaY > 0){
     
           this.moveDown();
@@ -112,12 +79,35 @@ module.exports = React.createClass({
         this.moving = false; 
       }, 2000);
     }else {
-
       props.preventDefault();
       props.stopPropagation();
-      
     }
-    // var moveDown = _.delay(this.moveDown(), 1000);
+  },
+
+  onTouchEnd(e){
+    var lastY = this.startY;
+    if(!this.moving) {
+      this.moving = true;
+      if(lastY){
+        if(e.changedTouches[0].clientY < lastY){
+          this.moveDown();
+        }else{
+          this.moveUp()
+        }
+      }
+
+      this.lastY = e.changedTouches[0].clientY;
+
+      _.delay(() => {
+        this.moving = false; 
+      }, 2000);
+    }else {
+      e.stopPropagation();
+    }
+  },
+
+  onTouchStart(e){
+    this.startY = e.changedTouches[0].clientY;
   },
 
   render(){
@@ -133,12 +123,12 @@ module.exports = React.createClass({
       )
     });
 
-
     return(
-      <div onWheel={this.handleScroll} onTouchMove={this.handleMove}> 
+      <div onWheel={this.handleScroll} onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}> 
         {pages}
       </div>
     )
   }
 });
-// module.exports = OnePager;
+
+module.exports = OnePager;

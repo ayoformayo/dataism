@@ -1,5 +1,3 @@
-var injectTapEventPlugin = require("react-tap-event-plugin");
-injectTapEventPlugin();
 global.React = require('react/addons');
 global._ = require('underscore');
 global.$ = global.jQuery = require('jquery');
