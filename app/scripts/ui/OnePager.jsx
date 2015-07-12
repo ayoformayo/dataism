@@ -1,4 +1,4 @@
-React.initializeTouchEvents(true)
+const ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 var _ = require('underscore');
 var PAGES = [
   {
@@ -116,19 +116,22 @@ var OnePager = React.createClass({
   render(){
     var sectionHeight = window.innerHeight;
     var sectionWidth = window.innerWidth;
-    var pages = _.map(PAGES, (obj) => {
+    var pages = _.map(PAGES, (obj, i) => {
+      var key = 'page_' + i;
       var Page = obj.component;
       return (
-        <section style={{height: sectionHeight, width: sectionWidth, position: "relative"}}>
+        <section key={key} style={{height: sectionHeight, width: sectionWidth, position: "relative"}}>
           <a id={obj.name} />
-          <Page />
+          <Page ref={obj.name} />
         </section>
       )
     });
 
     return(
-      <div onWheel={this.handleScroll} onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}> 
-        {pages}
+      <div className='pages-container' style={{height: sectionHeight, width: sectionWidth, position: "relative"}} onWheel={this.handleScroll} onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}> 
+        <ReactCSSTransitionGroup transitionName="page" transitionAppear={true}>
+          {pages}
+        </ReactCSSTransitionGroup>
       </div>
     )
   }
