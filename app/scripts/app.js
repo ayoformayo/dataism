@@ -27,7 +27,7 @@ var Handler = React.createClass({
     // <Route path="sankey" handler={Sankey}/>
 var routes = (
   <Route handler={DefaultLayout}>
-    <Route path="/?:slug?" handler={OnePager}/>
+    <Route name='activity-feed' path="/?:slug?" handler={OnePager}/>
   </Route>
 );
 
