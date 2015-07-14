@@ -6,36 +6,8 @@
 }
 .pages-scroller {
   position: relative;
-  transition: all 2s ease 0s;
+  transition: all 2s ease-out 0s;
 }
 .pages-container {
   overflow-y: hidden;
-}
-
-.page-enter {
-  /*opacity: 0.01;
-  transition: opacity .5s ease-in;*/
-  /*margin-top: 0;*/
-}
-
-.page-enter.page-enter-active {
-  /*margin-top: -125px;*/
-}
-
-/*.page-leave {
-  opacity: 1;
-  transition: opacity .5s ease-in;
-}
-
-.page-leave.page-leave-active {
-  opacity: 0.01;
-}*/
-
-.page-appear {
-  opacity: 0.01;
-  transition: opacity .5s ease-in;
-}
-
-.page-appear.page-appear-active {
-  opacity: 1;
 }
