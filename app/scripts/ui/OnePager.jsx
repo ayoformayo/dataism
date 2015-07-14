@@ -23,6 +23,11 @@ var OnePager = React.createClass({
   mixins: [ Router.Navigation, Router.State ],
 
   handleScroll(props){
+    if (props.deltaY > 0 ) this.handleMove('up');
+    if (props.deltaY < 0 ) nextIndex = this.handleMove('down');
+  },
+
+  handleMove(direction){
     if(!this.moving){
       this.moving = true;
       var slug = this.getParams().slug || PAGES[0].name;
@@ -33,8 +38,8 @@ var OnePager = React.createClass({
         }
       });
       var nextIndex;
-      if (props.deltaY > 0 && currentIndex < PAGES.length - 1) nextIndex = currentIndex + 1;
-      if (props.deltaY < 0 && currentIndex > 0) nextIndex = currentIndex - 1;
+      if (direction === 'up' && currentIndex < PAGES.length - 1) nextIndex = currentIndex + 1;
+      if (direction === 'down' && currentIndex > 0) nextIndex = currentIndex - 1;
       if(_.isUndefined(nextIndex)) nextIndex = currentIndex;
       var comp = PAGES[nextIndex];
       var that = this;
@@ -48,6 +53,10 @@ var OnePager = React.createClass({
   },
 
   onTouchEnd(e){
+    var startY = this.startY;
+    var lastY = e.changedTouches[0].clientY;
+    if(lastY > startY) this.handleMove('down');
+    if(lastY < startY) this.handleMove('up');
   },
 
   onTouchStart(e){
