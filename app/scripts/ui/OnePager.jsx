@@ -89,7 +89,7 @@ var OnePager = React.createClass({
         currentIndex = index;
       };
     });
-    pageScoller.bottom =  currentIndex * sectionHeight;
+    pageScoller.transform = 'translateY(' + currentIndex * -sectionHeight + 'px)';
     return(
       <div className='pages-container' style={{height: sectionHeight, width: sectionWidth, position: "relative"}} onWheel={this.handleScroll} onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}> 
        <div className='pages-scroller' style={pageScoller}> 
