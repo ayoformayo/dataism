@@ -6,10 +6,12 @@
 }
 .pages-scroller {
   position: relative;
-  transition: all 2s ease-out 0s;
-  -webkit-transition: all 2s ease-out 0s;
-  -moz-transition: all 2s ease-out 0s;
-
+  /*-moz-transform: translateY(0); */
+  transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  transition: all 1s cubic-bezier(1.000, 0.0, 0.405, 1) 0s;
+  -webkit-transition: all 1s cubic-bezier(1.000, 0.0, 0.405, 1) 0s;
+  -moz-transition: all 1s cubic-bezier(1.000, 0.0, 0.405, 1) 0s;
 }
 .pages-container {
   overflow-y: hidden;
