@@ -7,6 +7,9 @@
 .pages-scroller {
   position: relative;
   transition: all 2s ease-out 0s;
+  -webkit-transition: all 2s ease-out 0s;
+  -moz-transition: all 2s ease-out 0s;
+
 }
 .pages-container {
   overflow-y: hidden;

@@ -79,7 +79,9 @@ var OnePager = React.createClass({
     var pageScoller = {
       height: sectionHeight,
       width: sectionWidth,
-      perspective: sectionHeight +'px'
+      perspective: sectionHeight +'px',
+      '-moz-perspective': sectionHeight +'px',
+      '-webkit-perspective': sectionHeight +'px'
     };
     var slug = this.getParams().slug || PAGES[0].name;
     var ref = this.refs[slug];
