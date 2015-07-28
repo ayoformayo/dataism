@@ -11,17 +11,18 @@ var LiquorMaps = React.createClass({
     var color = d3.scale.category20();
     var svg = d3.select('.svg-container')
               .append('svg')
-              .attr('height', height)
-              .attr('width', width);
+              .attr('viewBox', '0 0 1200 600')
+              .attr('height', '100%')
+              .attr('width', '100%');
     var scale = height * 92.43697478991596
 
-    var textField = svg.append('text')
-                     .attr("x", -10 )
-                     .attr("y", 0)
-                     .text("ASDASDSD")
-                     .attr("font-family", "sans-serif")
-                     .attr("font-size", "20px")
-                     .attr("fill", "red");
+    // var textField = svg.append('text')
+    //                  .attr("x", -10 )
+    //                  .attr("y", 0)
+    //                  .text("ASDASDSD")
+    //                  .attr("font-family", "sans-serif")
+    //                  .attr("font-size", "20px")
+    //                  .attr("fill", "red");
 
     d3.xhr('/maps/new_york.json', (error, success) => {
       var newYork;

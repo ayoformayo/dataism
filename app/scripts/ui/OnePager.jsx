@@ -70,15 +70,15 @@ var OnePager = React.createClass({
       var key = 'page_' + i;
       var Page = obj.component;
       return (
-        <section key={key} style={{height: sectionHeight, width: sectionWidth, position: "relative"}}>
+        <section key={key} style={{height: '100%', width: '100%', position: "relative"}}>
           <a id={obj.name} />
           <Page ref={obj.name} />
         </section>
       )
     });
     var pageScoller = {
-      height: sectionHeight,
-      width: sectionWidth,
+      height: '100%',
+      width: '100%',
       perspective: sectionHeight +'px',
       '-moz-perspective': sectionHeight +'px',
       '-webkit-perspective': sectionHeight +'px'
@@ -94,7 +94,7 @@ var OnePager = React.createClass({
     });
     pageScoller.transform = 'translateY(' + currentIndex * -sectionHeight + 'px)';
     return(
-      <div className='pages-container' style={{height: sectionHeight, width: sectionWidth, position: "relative"}} onWheel={this.handleScroll} onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}> 
+      <div className='pages-container' style={{height: '100%', width: '100%', position: "fixed"}} onWheel={this.handleScroll} onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}> 
        <div className='pages-scroller' style={pageScoller}> 
          {pages}
        </div>

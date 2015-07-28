@@ -16,8 +16,9 @@ var UBHeatMap = React.createClass({
 
     var svg = d3.select('.heat-map-container')
               .append('svg')
-              .attr('height', height)
-              .attr('width', width);
+              .attr('viewBox', '0 0 1200 700')
+              .attr('height', '100%')
+              .attr('width', '100%');
     var scale = width * 0.9;
     var projection = d3.geo.albersUsa()
         .scale(scale)
