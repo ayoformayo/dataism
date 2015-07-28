@@ -4,6 +4,7 @@ global.$ = global.jQuery = require('jquery');
 global.Router = require('react-router');
 global.Reflux = require('reflux');
 global.d3 = require('d3');
+global.classNames = require('classnames');
 
 
 var Route = Router.Route;
@@ -14,17 +15,6 @@ var LiquorMap = require("./ui/liquor_maps.jsx"),
     DefaultLayout = require("./ui/layout.jsx"),
     OnePager = require("./ui/OnePager.jsx");
 
-var RouteHandler = Router.RouteHandler;
-
-var Handler = React.createClass({
-  render () {
-    return (
-      <RouteHandler/>
-    )
-  }
-});
-    // <Route path="liquor_map" handler={LiquorMap}/>
-    // <Route path="sankey" handler={Sankey}/>
 var routes = (
   <Route handler={DefaultLayout}>
     <Route name='activity-feed' path="/?:slug?" handler={OnePager}/>

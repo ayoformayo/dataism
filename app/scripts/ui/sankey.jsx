@@ -1,4 +1,5 @@
 var d3 = require('d3');
+var SVGContainer = require('./SvgContainer.jsx');
 d3.sankey = function() {
   var sankey = {},
       nodeWidth = 24,
@@ -309,10 +310,7 @@ var Sankey = React.createClass({
         format = function(d) { return formatNumber(d) + " TWh"; },
         color = d3.scale.category20();
 
-    var svg = d3.select(".my-svg").append("svg")
-        .attr('viewBox', '0 0 1200 600')
-        .attr("width", '100%')
-        .attr("height", '100%')
+    var svg = d3.select(".default-svg-container.my-svg svg")
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     var sankey = d3.sankey()
@@ -370,10 +368,7 @@ var Sankey = React.createClass({
 
   render(){
     return(
-      <div>
-        <a name="sankey"></a>
-        <div className="my-svg default-svg-container" />
-      </div>
+      <SVGContainer className='my-svg' onMount={this.renderSlack}/>
     )
   }
 });

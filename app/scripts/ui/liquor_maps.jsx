@@ -3,17 +3,18 @@
 var React = require('react');
 var d3 = require('d3');
 var topojson = require('topojson');
+var SVGContainer = require('./SvgContainer.jsx');
 
 var LiquorMaps = React.createClass({
-  componentDidMount(){
+  drawMe(){
     var height = $('section').height(),
     width = $('section').width();
     var color = d3.scale.category20();
-    var svg = d3.select('.svg-container')
-              .append('svg')
-              .attr('viewBox', '0 0 1200 600')
-              .attr('height', '100%')
-              .attr('width', '100%');
+    var svg = d3.select('.default-svg-container.liquor-map svg')
+              // .append('svg')
+              // .attr('viewBox', '0 0 1200 600')
+              // .attr('height', '100%')
+              // .attr('width', '100%');
     var scale = height * 92.43697478991596
 
     // var textField = svg.append('text')
@@ -73,8 +74,9 @@ var LiquorMaps = React.createClass({
   },
 
   render() {
+      // <div className="svg-container default-svg-container" ref="container" />
     return (
-      <div className="svg-container default-svg-container" ref="container" />
+      <SVGContainer className='liquor-map' onMount={this.drawMe}/>
     );
   }
 });

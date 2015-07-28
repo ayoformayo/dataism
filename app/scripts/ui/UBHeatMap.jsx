@@ -1,24 +1,16 @@
 var Router = require('react-router');
 var d3 = require('d3');
 var topojson = require('topojson');
+var SVGContainer = require('./SvgContainer.jsx');
 
 var UBHeatMap = React.createClass({
   mixins: [ Router.Navigation, Router.State ],
 
-  getInitialState() {
-    var slug = this.getParams().slug;
-    return { slug: slug };
-  },
-
-  componentDidMount(){
+  drawMe(){
     var height = $('section').height(),
     width = $('section').width();
 
-    var svg = d3.select('.heat-map-container')
-              .append('svg')
-              .attr('viewBox', '0 0 1200 700')
-              .attr('height', '100%')
-              .attr('width', '100%');
+    var svg = d3.select('.default-svg-container.heat-map-container svg');
     var scale = width * 0.9;
     var projection = d3.geo.albersUsa()
         .scale(scale)
@@ -64,7 +56,7 @@ var UBHeatMap = React.createClass({
 
   render(){
     return (
-      <div className="heat-map-container default-svg-container" ref="container" />
+      <SVGContainer className='heat-map-container' onMount={this.drawMe}/>
     )
   }
 });

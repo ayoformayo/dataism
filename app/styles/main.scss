@@ -12,10 +12,16 @@ $icon-font-path: "../fonts/";
     position: relative;
     width: 100%;
     height: 100%;
-}
-
-.svg-container svg {
-    background-color: black;
+    &.liquor-map {
+        svg {
+            background-color: black;
+        }
+    }
+    &.heat-map-container {
+        svg {
+            background-color: white;
+        }
+    }
 }
 
 .my-svg svg {
