@@ -2,9 +2,12 @@
 var SvgContainer = React.createClass({
   componentDidMount(){
     var containerSelected = '.default-svg-container.'+this.props.className;
+    var sectionHeight = window.innerHeight;
+    var sectionWidth = window.innerWidth;
+    var viewBox = '0 0 ' + sectionWidth + ' ' + sectionHeight;
     d3.select(containerSelected)
                   .append('svg')
-                  .attr('viewBox', '0 0 1200 700')
+                  .attr('viewBox', viewBox)
                   .attr('height', '100%')
                   .attr('width', '100%');
     this.props.onMount();
