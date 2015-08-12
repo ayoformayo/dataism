@@ -20,7 +20,11 @@ var SvgContainer = React.createClass({
     classHash[this.props.className]  = true;
     var containerClass = classNames(classHash);
 
-    return <div className={containerClass} />;
+    return (
+      <div className={containerClass} >
+        {this.props.children}
+      </div>
+    );
   },
 });
 

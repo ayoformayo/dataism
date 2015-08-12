@@ -1,21 +1,32 @@
 const ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 var _ = require('underscore');
 var PAGES = [
+  // {
+  //   name: 'liquorLicenses',
+  //   anchor: '#liquor_licenses',
+  //   component: require('./liquor_maps.jsx')
+  // },
+  // {
+  //   name: 'heatMap',
+  //   anchor: '#heat_map',
+  //   component: require('./UBHeatMap.jsx')
+  // },
+  // {
+  //   name: 'sankey',
+  //   anchor: '#sankey',
+  //   component: require('./sankey.jsx')
+  // },
+  // {
+  //   name: 'graffitiMap',
+  //   anchor: '#graffiti',
+  //   component: require('./GraffitiMap.jsx')
+  // },
   {
-    name: 'liquorLicenses',
-    anchor: '#liquor_licenses',
-    component: require('./liquor_maps.jsx')
-  },
-  {
-    name: 'heatMap',
-    anchor: '#heat_map',
-    component: require('./UBHeatMap.jsx')
-  },
-  {
-    name: 'sankey',
-    anchor: '#sankey',
-    component: require('./sankey.jsx')
+    name: 'chicagoLanguages',
+    anchor: '#languages',
+    component: require('./ChicagoLanguages.jsx')
   }
+
 ]
 var Router = require('react-router');
 
@@ -69,6 +80,7 @@ var OnePager = React.createClass({
     var pages = _.map(PAGES, (obj, i) => {
       var key = 'page_' + i;
       var Page = obj.component;
+      console.log(obj.name)
       return (
         <section key={key} style={{height: '100%', width: '100%', position: "relative"}}>
           <a id={obj.name} />
