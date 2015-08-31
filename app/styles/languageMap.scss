@@ -1,10 +1,13 @@
 .default-svg-container.language-map{
   .btn-group-vertical {
     position: absolute;
+    button {
+      height: 5px;
+    }
   }
 }
 
 .chicago-community {
   fill: none;
-  stroke: blue;
+  stroke: green;
 }

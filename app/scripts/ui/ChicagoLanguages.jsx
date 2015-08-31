@@ -3,6 +3,8 @@ var SVGContainer = require('./SvgContainer.jsx');
 var topojson = require('topojson');
 var ButtonGroup = require('react-bootstrap').ButtonGroup;
 var Button = require('react-bootstrap').Button;
+var DropdownButton = require('react-bootstrap').DropdownButton;
+var MenuItem = require('react-bootstrap').MenuItem;
 
 var ChicagoLanguages = React.createClass({
 
@@ -30,7 +32,7 @@ var ChicagoLanguages = React.createClass({
 
       var chicago = JSON.parse(success.response);
       var chicagoLanguages = chicago.languages;
-      this.setState({languages: chicagoLanguages});
+      this.setState({languages: chicagoLanguages, activelanguage: chicagoLanguages[0]});
       var g = svg.append("g");
       var features = topojson.feature(chicago, chicago.objects.google_map);
 
@@ -39,7 +41,55 @@ var ChicagoLanguages = React.createClass({
         .data(features.features)
         .enter().append("path")
         .attr('class', (d)=>{ return 'chicago-community'})
-        .attr("d", path)
+        .style('fill', (d)=>{
+          var commValues = _.values(chicagoLanguages);
+          var properValues = _.filter(commValues, (value)=>{
+            return _.contains(chicagoLanguages, value);
+          });
+
+          var valueArray  = _.map(properValues, (lang)=>{return d.properties[lang]}); 
+          var maxVal = Math.max.apply( Math, valueArray );
+          var minVal = Math.min.apply( Math, valueArray );
+          var ramp = d3.scale.linear().domain([maxVal,minVal]).range(["red","blue"]);
+
+          return ramp(d.properties[this.state.activelanguage]);
+        })
+        .attr("d", path);
+      var idGradient = "legendGradient";
+
+      var linearGradient = svg.append("g")
+        .append("defs")
+        .append("linearGradient")
+            .attr("id",idGradient)
+            .attr("x1","0%")
+            .attr("x2","0%")
+            .attr("y1","0%")
+            .attr("y2","100%")
+      var colors = ['red', 'blue'];
+      console.log(linearGradient)
+
+      _.each(colors, (color,i)=>{
+        linearGradient.append('stop')
+          .attr('stop-color', color)
+          .attr('stop-opacity', 1)
+          .attr('offset', (d)=>{
+            var percent = (i / (colors.length - 1));
+            return percent;
+          });
+      })
+
+      svg.append('text')
+        .text('100%')
+        .attr('x', width-30)
+        .attr('y', 10);
+
+      svg.append('rect')
+        .attr("fill","url(#" + idGradient + ")")
+        .attr('height', height+'px')
+        .attr('width', '10px')
+        .attr('x', width-10+'px')
+        .attr('y', '0px');
+
     });
   },
 
@@ -53,7 +103,7 @@ var ChicagoLanguages = React.createClass({
         return _.contains(languages, value);
       });
 
-      var valueArray  = _.map(properValues, (lang)=>{return d.properties[lang]});
+      var valueArray  = _.map(properValues, (lang)=>{return d.properties[lang]}); 
       var maxVal = Math.max.apply( Math, valueArray );
       var minVal = Math.min.apply( Math, valueArray );
       var ramp = d3.scale.linear().domain([maxVal,minVal]).range(["red","blue"]);
@@ -94,7 +144,7 @@ var ChicagoLanguages = React.createClass({
     var activelanguage = this.state.activelanguage || {};
     var languages = this.state.languages || [];
     var languageButtons = _.map(languages, (language)=>{
-      return <Button onClick={this.handleClick.bind(this, language)}>{language}</Button>
+      return <MenuItem onClick={this.handleClick.bind(this, language)}>{language}</MenuItem>
     });
 
     return languageButtons;
@@ -103,9 +153,9 @@ var ChicagoLanguages = React.createClass({
   render() {
     return (
       <SVGContainer className='language-map' onMount={this.drawMe}>
-        <ButtonGroup vertical>
+        <DropdownButton title={this.state.activelanguage}>
           {this.renderButtons()}
-        </ButtonGroup>
+        </DropdownButton>
       </SVGContainer>
     );
   }
