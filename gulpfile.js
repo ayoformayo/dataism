@@ -158,15 +158,16 @@ gulp.task('extras', function() {
 
 // Watch
 gulp.task('watch', ['html', 'fonts', 'bundle'], function() {
-
-    browserSync({
-        notify: false,
-        logPrefix: 'BS',
-        // Run as an https by uncommenting 'https: true'
-        // Note: this uses an unsigned certificate which on first access
-        //       will present a certificate warning in the browser.
-        // https: true,
-        server: ['public']
+    var powUrl = process.env.POW_UB_URL || 'dataism.dev';
+    var touch = require('touch');
+    touch.sync('tmp/restart.txt');
+    browserSync.init({
+      proxy: powUrl,
+      ghostMode: false,
+      options: {
+        reloadDelay: 250,
+      },
+      notify: true,
     });
 
     // Watch .json files
@@ -177,7 +178,7 @@ gulp.task('watch', ['html', 'fonts', 'bundle'], function() {
 
     gulp.watch(['app/styles/**/*.scss', 'app/styles/**/*.css'], ['styles', reload]);
 
-    
+
 
     // Watch image files
     gulp.watch('app/images/**/*', reload);
