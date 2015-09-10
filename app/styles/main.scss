@@ -1,5 +1,4 @@
 $icon-font-path: "../fonts/";
-
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
 @import "heatMap";
 @import "languageMap";
@@ -7,22 +6,6 @@ $icon-font-path: "../fonts/";
 
 .app-bar {
     background-color: transparent !important;
-}
-
-.default-svg-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    &.liquor-map {
-        svg {
-            background-color: black;
-        }
-    }
-    &.heat-map-container {
-        svg {
-            background-color: white;
-        }
-    }
 }
 
 .my-svg svg {
@@ -36,11 +19,6 @@ $icon-font-path: "../fonts/";
 .new-york-store {
     /*fill: none;
     stroke: blue;*/
-}
-
-section {
-    position: relative;
-    height: 100%
 }
 
 .node rect {
