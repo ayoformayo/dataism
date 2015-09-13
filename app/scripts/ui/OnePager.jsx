@@ -28,7 +28,6 @@ var PAGES = [
   ],
 ];
 var Router = require('react-router');
-var ContainerRow = require('./ContainerRow.jsx');
 
 var OnePager = React.createClass({
   mixins: [ Router.Navigation, Router.State ],

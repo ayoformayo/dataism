@@ -26,7 +26,7 @@ var ChicagoLanguages = React.createClass({
           .center([-87.62, 41.86])
           .scale(scale)
           .translate([width / 2, height / 2]);
-      
+
         var path = d3.geo.path()
             .projection(projection);
 
@@ -47,7 +47,7 @@ var ChicagoLanguages = React.createClass({
             return _.contains(chicagoLanguages, value);
           });
 
-          var valueArray  = _.map(properValues, (lang)=>{return d.properties[lang]}); 
+          var valueArray  = _.map(properValues, (lang)=>{return d.properties[lang]});
           var maxVal = Math.max.apply( Math, valueArray );
           var minVal = Math.min.apply( Math, valueArray );
           var ramp = d3.scale.linear().domain([maxVal,minVal]).range(["red","blue"]);
@@ -94,6 +94,7 @@ var ChicagoLanguages = React.createClass({
   },
 
   handleClick(language){
+    this.setState({activelanguage: language});
     var languages = this.state.languages;
     var communities = d3.selectAll('.chicago-community');
     communities.transition().style('fill', (d)=>{
@@ -103,7 +104,7 @@ var ChicagoLanguages = React.createClass({
         return _.contains(languages, value);
       });
 
-      var valueArray  = _.map(properValues, (lang)=>{return d.properties[lang]}); 
+      var valueArray  = _.map(properValues, (lang)=>{return d.properties[lang]});
       var maxVal = Math.max.apply( Math, valueArray );
       var minVal = Math.min.apply( Math, valueArray );
       var ramp = d3.scale.linear().domain([maxVal,minVal]).range(["red","blue"]);
@@ -144,7 +145,7 @@ var ChicagoLanguages = React.createClass({
     var activelanguage = this.state.activelanguage || {};
     var languages = this.state.languages || [];
     var languageButtons = _.map(languages, (language)=>{
-      return <MenuItem onClick={this.handleClick.bind(this, language)}>{language}</MenuItem>
+      return <MenuItem onSelect={this.handleClick.bind(this, language)}>{language}</MenuItem>
     });
 
     return languageButtons;
