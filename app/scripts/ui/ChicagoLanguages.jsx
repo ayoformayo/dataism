@@ -25,7 +25,7 @@ var ChicagoLanguages = React.createClass({
       var projection = d3.geo.mercator()
           .center([-87.62, 41.86])
           .scale(scale)
-          .translate([width / 2, height / 2]);
+          .translate([width / 1.4, height / 2.3]);
 
         var path = d3.geo.path()
             .projection(projection);
@@ -61,10 +61,10 @@ var ChicagoLanguages = React.createClass({
         .append("defs")
         .append("linearGradient")
             .attr("id",idGradient)
-            .attr("x1","0%")
+            .attr("x1","100%")
             .attr("x2","0%")
             .attr("y1","0%")
-            .attr("y2","100%")
+            .attr("y2","0%");
       var colors = ['red', 'blue'];
       console.log(linearGradient)
 
@@ -76,19 +76,34 @@ var ChicagoLanguages = React.createClass({
             var percent = (i / (colors.length - 1));
             return percent;
           });
-      })
+      });
 
       svg.append('text')
-        .text('100%')
-        .attr('x', width-30)
-        .attr('y', 10);
+        .text('Foreign language popularity')
+        .attr('width', 20)
+        .attr('x', width * 0.1)
+        .attr('y', height - height * 0.4);
+      svg.append('text')
+        .text('by Chicago neighborhood')
+        .attr('width', 20)
+        .attr('x', width * 0.1)
+        .attr('y', height - height * 0.38);
 
       svg.append('rect')
         .attr("fill","url(#" + idGradient + ")")
-        .attr('height', height+'px')
-        .attr('width', '10px')
-        .attr('x', width-10+'px')
-        .attr('y', '0px');
+        .attr('height', '10px')
+        .attr('width', '250px')
+        .attr('x', width * 0.1)
+        .attr('y', height - height * 0.36);
+
+        svg.append('text')
+          .text('Least Popular')
+          .attr('x', width * 0.1)
+          .attr('y', height - height * 0.30);
+        svg.append('text')
+          .text('Most Popular')
+          .attr('x', (width * 0.1) + 230)
+          .attr('y', height - height * 0.30);
 
     });
   },
@@ -145,7 +160,7 @@ var ChicagoLanguages = React.createClass({
     var activelanguage = this.state.activelanguage || {};
     var languages = this.state.languages || [];
     var languageButtons = _.map(languages, (language)=>{
-      return <MenuItem onSelect={this.handleClick.bind(this, language)}>{language}</MenuItem>
+      return <MenuItem className="language-button" onSelect={this.handleClick.bind(this, language)}>{language}</MenuItem>
     });
 
     return languageButtons;

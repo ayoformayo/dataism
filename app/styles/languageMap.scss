@@ -1,6 +1,10 @@
 .default-svg-container.language-map{
   .dropdown.btn-group {
     position: absolute;
+    ul.dropdown-menu {
+      max-height: 500px;
+      overflow-y: scroll;
+    }
   }
   .btn-group-vertical {
     position: absolute;
