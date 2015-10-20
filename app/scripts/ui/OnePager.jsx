@@ -98,6 +98,10 @@ var OnePager = React.createClass({
         row++;
         break;
     }
+    if(row < 0) return;
+    if(PAGES.length < row + 1) return;
+    if(PAGES[row].length < col + 1) return;
+    if(col < 0) return;
 
     var nextComp = PAGES[row][col];
     this.setState({direction: args.direction}, ()=>{
@@ -140,15 +144,9 @@ var OnePager = React.createClass({
       rowIndex = 0;
     }
     _.each(PAGES, (row, rowI, array) => {
-      console.log(row)
-      console.log(rowIndex)
-      console.log(array)
 
       _.each(row, (element, colI) => {
         if(element.name === slug){
-          console.log(element.name)
-          console.log('col', colI)
-          console.log('row', rowI)
           colIndex = colI;
           rowIndex = rowI;
         };
