@@ -79,7 +79,7 @@ var ChicagoLanguages = React.createClass({
       });
 
       svg.append('text')
-        .text('Foreign language popularity')
+        .text('Foreign language popularity - REFRESHED')
         .attr('width', 20)
         .attr('x', width * 0.1)
         .attr('y', height - height * 0.4);
