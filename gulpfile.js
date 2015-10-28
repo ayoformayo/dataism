@@ -115,7 +115,7 @@ gulp.task('clean', function(cb) {
 });
 
 // Bundle
-gulp.task('bundle', ['styles', 'scripts', 'bower', 'fonts'], function() {
+gulp.task('bundle', ['bower', 'styles', 'scripts', 'fonts'], function() {
     return gulp.src('./app/*.html')
         .pipe($.useref.assets())
         .pipe($.useref.restore())
@@ -123,7 +123,7 @@ gulp.task('bundle', ['styles', 'scripts', 'bower', 'fonts'], function() {
         .pipe(gulp.dest('public'));
 });
 
-gulp.task('buildBundle', ['styles', 'buildScripts', 'bower', 'fonts',], function() {
+gulp.task('buildBundle', ['bower', 'styles', 'buildScripts'], function() {
     return gulp.src('./app/*.html')
         .pipe($.useref.assets())
         .pipe($.useref.restore())
