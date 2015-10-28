@@ -23,7 +23,7 @@ var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 
 // Styles
-gulp.task('styles', ['sass'  ]);
+gulp.task('styles', ['sass']);
 
 gulp.task('sass', function() {
     return gulp.src(['app/styles/**/*.scss', 'app/styles/**/*.css'])
@@ -104,9 +104,7 @@ gulp.task('images', function() {
 
 // Fonts
 gulp.task('fonts', function() {
-    return gulp.src(require('main-bower-files')({
-            filter: '**/*.{eot,svg,ttf,woff,woff2}'
-        }).concat('app/fonts/**/*'))
+    return gulp.src('app/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*')
         .pipe(gulp.dest('public/fonts'));
 });
 
