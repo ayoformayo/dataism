@@ -192,6 +192,6 @@ gulp.task('build', ['html', 'buildBundle', 'images', 'fonts', 'extras'], functio
 
 // Default task
 gulp.task('default', ['clean', 'build']);
-// gulp.task('heroku:production', function(){
-//   runSeq('clean', 'build')
-// })
+gulp.task('heroku:production', function(){
+  runSeq('clean', 'build');
+});
