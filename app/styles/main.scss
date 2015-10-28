@@ -1,8 +1,14 @@
-$icon-font-path: "../fonts/";
+// $icon-font-path: "../fonts/";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
 @import "heatMap";
 @import "languageMap";
 @import "./layout/layout";
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
 
 .app-bar {
     background-color: transparent !important;
