@@ -104,7 +104,7 @@ gulp.task('images', function() {
 
 // Fonts
 gulp.task('fonts', function() {
-    return gulp.src('app/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*')
+    return gulp.src('app/fonts/*')
         .pipe(gulp.dest('public/fonts'));
 });
 
@@ -183,7 +183,7 @@ gulp.task('watch', ['html', 'fonts', 'bundle'], function() {
 });
 
 // Build
-gulp.task('build', ['html', 'buildBundle', 'images', 'extras'], function() {
+gulp.task('build', ['html', 'buildBundle', 'fonts', 'images', 'extras'], function() {
     gulp.src('public/scripts/app.js')
         .pipe($.uglify())
         .pipe($.stripDebug())
@@ -191,7 +191,7 @@ gulp.task('build', ['html', 'buildBundle', 'images', 'extras'], function() {
 });
 
 // Default task
-gulp.task('default', ['clean', 'build', 'fonts']);
+gulp.task('default', ['clean', 'build']);
 // gulp.task('heroku:production', function(){
 //   runSeq('clean', 'build');
 // });
