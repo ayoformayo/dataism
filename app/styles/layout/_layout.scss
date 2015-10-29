@@ -121,24 +121,43 @@
   width: 100%;
   .arrow-container {
     span.glyphicon {
+      font-size: 14px;
       color: red;
       position: absolute;
       z-index: 1000;
+      &:hover {
+        animation: pulse 1s infinite;
+      }
+      @keyframes pulse {
+        0% {
+          font-size: 14px
+        }
+        50% {
+          font-size: 24px
+        }
+        100% {
+          font-size: 14px
+        }
+      }
       &.glyphicon-chevron-left {
         right: 95%;
         top: 50%;
+        transform: translateY(-50%);
       }
       &.glyphicon-chevron-right {
         right: 5%;
         top: 50%;
+        transform: translateY(-50%);
       }
       &.glyphicon-chevron-up {
         top: 5%;
         right: 50%;
+        transform: translateX(50%);
       }
       &.glyphicon-chevron-down {
         top: 95%;
         right: 50%;
+        transform: translateX(50%);
       }
     }
   }
