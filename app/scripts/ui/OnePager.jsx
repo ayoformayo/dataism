@@ -35,79 +35,39 @@ var OnePager = React.createClass({
     return {row: 0, col: 0, direction: 'down'};
   },
 
-  handleScroll(props){
-    if (props.deltaY > 0 ) this.handleMove('up');
-    if (props.deltaY < 0 ) nextIndex = this.handleMove('down');
-  },
-
-  handleMove(direction){
+  transitionViz(args){
     if(!this.moving){
       this.moving = true;
-      var slug = this.getParams().slug || PAGES[0].name;
-      var currentIndex;
-      _.each(PAGES, (element, index, array) => {
-        if(element.name === slug){
-          currentIndex = index;
-        }
-      });
-      var nextIndex;
-      if (direction === 'up' && currentIndex < PAGES.length - 1) nextIndex = currentIndex + 1;
-      if (direction === 'down' && currentIndex > 0) nextIndex = currentIndex - 1;
-      if(_.isUndefined(nextIndex)) nextIndex = currentIndex;
-      var comp = PAGES[nextIndex];
-      var that = this;
-      if(nextIndex !== currentIndex){
-        this.transitionTo('activity-feed',   {slug: comp.name });
+      var col = args.column;
+      var row = args.row;
+
+      switch(args.direction){
+        case 'right':
+          col++;
+          break;
+        case 'left':
+          col--;
+          break;
+        case 'up':
+          row--;
+          break;
+        case 'down':
+          row++;
+          break;
       }
-     _.delay(() => {
+      if(row < 0) return;
+      if(PAGES.length < row + 1) return;
+      if(PAGES[row].length < col + 1) return;
+      if(col < 0) return;
+
+      var nextComp = PAGES[row][col];
+      this.setState({direction: args.direction}, ()=>{
+        this.transitionTo('activity-feed',   {slug: nextComp.name });
+      });
+      _.delay(() => {
         this.moving = false;
       }, 2000);
     }
-  },
-
-  onTouchEnd(e){
-    var startY = this.startY;
-    var lastY = e.changedTouches[0].clientY;
-    if(lastY > startY) this.handleMove('down');
-    if(lastY < startY) this.handleMove('up');
-  },
-
-  onTouchStart(e){
-    this.startY = e.changedTouches[0].clientY;
-  },
-
-  renderComponentRow(){
-
-  },
-
-  transitionViz(args){
-    var col = args.column;
-    var row = args.row;
-
-    switch(args.direction){
-      case 'right':
-        col++;
-        break;
-      case 'left':
-        col--;
-        break;
-      case 'up':
-        row--;
-        break;
-      case 'down':
-        row++;
-        break;
-    }
-    if(row < 0) return;
-    if(PAGES.length < row + 1) return;
-    if(PAGES[row].length < col + 1) return;
-    if(col < 0) return;
-
-    var nextComp = PAGES[row][col];
-    this.setState({direction: args.direction}, ()=>{
-      this.transitionTo('activity-feed',   {slug: nextComp.name });
-    });
-
   },
 
   renderComp(args){
@@ -187,4 +147,3 @@ var OnePager = React.createClass({
 });
 
 module.exports = OnePager;
-//
