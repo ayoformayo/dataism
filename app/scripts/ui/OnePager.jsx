@@ -55,6 +55,9 @@ var OnePager = React.createClass({
           row++;
           break;
       }
+      _.delay(() => {
+        this.moving = false;
+      }, 2000);
       if(row < 0) return;
       if(PAGES.length < row + 1) return;
       if(PAGES[row].length < col + 1) return;
@@ -64,9 +67,6 @@ var OnePager = React.createClass({
       this.setState({direction: args.direction}, ()=>{
         this.transitionTo('activity-feed',   {slug: nextComp.name });
       });
-      _.delay(() => {
-        this.moving = false;
-      }, 2000);
     }
   },
 
@@ -81,12 +81,31 @@ var OnePager = React.createClass({
     );
   },
 
+  renderArrows(args){
+    const colIndex = args.colIndex;
+    const rowIndex = args.rowIndex;
+    var arrows = [];
+    if(colIndex > 0) arrows.push({direction: 'left', name: 'chevron-left'});
+    if(colIndex + 1 < PAGES[rowIndex].length) arrows.push({direction: 'right', name: 'chevron-right'});
+    if(rowIndex > 0) arrows.push({direction: 'up', name: 'chevron-up'});
+    if(rowIndex + 1 < PAGES.length) arrows.push({direction: 'down', name: 'chevron-down'});
+    var arrowIcons = _.map(arrows, (arrow)=>{
+      var options = {
+        direction: arrow.direction,
+        column: colIndex,
+        row: rowIndex
+      }
+      return(
+        <Glyphicon glyph={arrow.name} onClick={this.transitionViz.bind(this, options)}/>
+      );
+    });
+    return arrowIcons;
+  },
+
   render(){
     var sectionHeight = window.innerHeight;
     var sectionWidth = window.innerWidth;
     var pageScoller = {
-      // height: '100%',
-      // width: '100%',
       perspective: sectionHeight +'px',
       '-moz-perspective': sectionHeight +'px',
       '-webkit-perspective': sectionHeight +'px'
@@ -113,22 +132,7 @@ var OnePager = React.createClass({
       });
 
     });
-    var arrows = [
-      {direction: 'left', name: 'chevron-left'},
-      {direction: 'right', name: 'chevron-right'},
-      {direction: 'up', name: 'chevron-up'},
-      {direction: 'down', name: 'chevron-down'}
-    ];
-    var arrowIcons = _.map(arrows, (arrow)=>{
-      var options = {
-        direction: arrow.direction,
-        column: colIndex,
-        row: rowIndex
-      }
-      return(
-        <Glyphicon glyph={arrow.name} onClick={this.transitionViz.bind(this, options)}/>
-      );
-    });
+    var arrowIcons = this.renderArrows({colIndex: colIndex, rowIndex: rowIndex});
     var page = this.renderComp({col: colIndex, row: rowIndex});
 
     return(
