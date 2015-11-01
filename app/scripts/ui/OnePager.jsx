@@ -1,14 +1,21 @@
+'use strict';
 const ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 const Glyphicon = require('react-bootstrap').Glyphicon;
+const Popover = require('react-bootstrap').Popover;
+const OverlayTrigger = require('react-bootstrap').OverlayTrigger;
 var _ = require('underscore');
 var PAGES = [
   [
     {
+      displayName: 'Where to Get a Drink in NYC',
+      displayText: "Check out a map of all of the Big Apple's drinking establishments",
       name: 'liquorLicenses',
       anchor: '#liquor_licenses',
       component: require('./liquor_maps.jsx')
     },
     {
+      displayName: 'Interactive Language Map of Chicago',
+      displayText: 'Explore the popularity of foreign languages in Chicago on a neighborhood basis.',
       name: 'chicagoLanguages',
       anchor: '#languages',
       component: require('./ChicagoLanguages.jsx')
@@ -16,11 +23,15 @@ var PAGES = [
   ],
   [
     {
+      displayName: 'Heat Map of UB moves',
+      displayText: 'Popular Moves.',
       name: 'heatMap',
       anchor: '#heat_map',
       component: require('./UBHeatMap.jsx')
     },
     {
+      displayName: 'Slack Chat Room experience',
+      displayText: 'A visualization of UB Slack users and their chat room activity.',
       name: 'sankey',
       anchor: '#sankey',
       component: require('./sankey.jsx')
@@ -95,8 +106,36 @@ var OnePager = React.createClass({
         column: colIndex,
         row: rowIndex
       }
+      let title;
+      let description;
+      let placement;
+      switch(arrow.direction){
+        case 'up':
+          placement = 'bottom';
+          title = PAGES[rowIndex-1][colIndex].displayName;
+          description = PAGES[rowIndex-1][colIndex].displayText;
+          break;
+        case 'down':
+          placement = 'top';
+          title = PAGES[rowIndex+1][colIndex].displayName;
+          description = PAGES[rowIndex+1][colIndex].displayText;
+          break;
+        case 'left':
+          placement = 'right';
+          title = PAGES[rowIndex][colIndex-1].displayName;
+          description = PAGES[rowIndex][colIndex-1].displayText;
+          break;
+        case 'right':
+          placement = 'left';
+          title = PAGES[rowIndex][colIndex+1].displayName;
+          description = PAGES[rowIndex][colIndex+1].displayText;
+          break;
+      }
+      let popover = <Popover title={title}>{description}</Popover>
       return(
-        <Glyphicon glyph={arrow.name} onClick={this.transitionViz.bind(this, options)}/>
+        <OverlayTrigger placement={placement} overlay={popover}>
+          <Glyphicon glyph={arrow.name} onClick={this.transitionViz.bind(this, options)}/>
+        </OverlayTrigger>
       );
     });
     return arrowIcons;

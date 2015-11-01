@@ -137,6 +137,7 @@
       position: absolute;
       z-index: 1000;
       &:hover {
+        cursor: pointer;
         animation: pulse 1s infinite;
       }
       &.glyphicon-chevron-left {
