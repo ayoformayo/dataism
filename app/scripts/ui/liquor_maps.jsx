@@ -30,7 +30,7 @@ const LiquorMaps = React.createClass({
       textY = 100;
       fontSize = '30px';
     }
-    textName.text('Active Liquor Licenses')
+    textName.text('Places to Get a Drink')
         .attr('fill', 'white')
         .attr('text-anchor', textAnchor)
         .attr('font-size', fontSize)
