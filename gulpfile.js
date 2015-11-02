@@ -185,7 +185,7 @@ gulp.task('watch', ['html', 'fonts', 'bundle'], function() {
 // Build
 gulp.task('build', ['html', 'buildBundle', 'images', 'fonts', 'extras'], function() {
     gulp.src('public/scripts/app.js')
-        .pipe($.uglify())
+        // .pipe($.uglify())
         .pipe($.stripDebug())
         .pipe(gulp.dest('public/scripts'));
 });
