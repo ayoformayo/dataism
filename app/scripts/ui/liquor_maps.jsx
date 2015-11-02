@@ -1,49 +1,77 @@
 'use strict';
 
-var React = require('react');
-var d3 = require('d3');
-var topojson = require('topojson');
-var SVGContainer = require('./SvgContainer.jsx');
+const React = require('react');
+const d3 = require('d3');
+const topojson = require('topojson');
+const SVGContainer = require('./SvgContainer.jsx');
 
-var LiquorMaps = React.createClass({
+const LiquorMaps = React.createClass({
   drawMe(){
-    var height = $('section').height(),
+    const height = $('section').height(),
     width = $('section').width();
-    var color = d3.scale.category20();
-    var svg = d3.select('.default-svg-container.liquor-map svg')
-    var scaleRatio = width < height ? 50 : 92.43;
-    var scale = height * scaleRatio;
+    const color = d3.scale.category20();
+    const svg = d3.select('.default-svg-container.liquor-map svg');
+    const scaleRatio = width < height ? 50 : 92.43;
+    const scale = height * scaleRatio;
+    const textName = svg.append('text');
+    const textDate = svg.append('text');
+    let textY;
+    let textX;
+    let fontSize;
+    let textAnchor = 'left';
+    if(width <= 768){
+      textAnchor = 'middle';
+      textX = width * 0.5;
+      fontSize = '32px';
+      textY = height - 200;
+    }else {
+      textAnchor = 'left';
+      textX = width * 0.1;
+      textY = 100;
+      fontSize = '30px';
+    }
+    textName.text('Active Liquor Licenses')
+        .attr('fill', 'white')
+        .attr('text-anchor', textAnchor)
+        .attr('font-size', fontSize)
+        .attr('x',textX)
+        .attr('y', textY);
+    textDate.text('New York NY, May 2015')
+        .attr('text-anchor', textAnchor)
+        .attr('fill', 'white')
+        .attr('font-size', fontSize)
+        .attr('x',textX)
+        .attr('y', textY + 50);
 
     d3.xhr('/maps/new_york.json', (error, success) => {
-      var newYork;
-      var projection = d3.geo.mercator()
+      const projection = d3.geo.mercator()
                   .center([-73.94, 40.70])
                   .scale(scale)
                   .translate([(width) / 2, (height)/2]);
-      
-        var path = d3.geo.path().pointRadius(1)
-            .projection(projection);
 
-        var g = svg.append("g");
+      const path = d3.geo.path().pointRadius(1)
+          .projection(projection);
 
-      newYork = JSON.parse(success.response);
-      g.append("g")
-        .attr("id", "boroughs")
-        .selectAll(".state")
+      const g = svg.append('g');
+
+      const newYork = JSON.parse(success.response);
+      g.append('g')
+        .attr('id', 'boroughs')
+        .selectAll('.state')
         .data(newYork.features)
-        .enter().append("path")
-        .attr("class", function(d){ return d.properties.name; })
-        .attr("class", 'new-york-unit')
-        .attr("d", path);
-      g.append("g")
-        .attr("id", "stores")
-        .selectAll(".stores")
+        .enter().append('path')
+        .attr('class', function(d){ return d.properties.name; })
+        .attr('class', 'new-york-unit')
+        .attr('d', path);
+      g.append('g')
+        .attr('id', 'stores')
+        .selectAll('.stores')
         .data(newYork.stores)
-        .enter().append("path")
-        .attr("id", function(d){ return d.properties.name; })
-        .attr("class", 'new-york-store')
-        .style("fill", (d) => { return d.color = color(d.properties.name.replace(/ .*/, ""))})
-        .attr("d", path);
+        .enter().append('path')
+        .attr('id', function(d){ return d.properties.name; })
+        .attr('class', 'new-york-store')
+        .style('fill', (d) => { return d.color = color(d.properties.name.replace(/ .*/, ''))})
+        .attr('d', path);
     });
   },
 
