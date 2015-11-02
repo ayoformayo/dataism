@@ -104,7 +104,7 @@ gulp.task('images', function() {
 
 // Fonts
 gulp.task('fonts', function() {
-    return gulp.src('app/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*')
+    return gulp.src(['app/fonts/*', 'app/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*'])
         .pipe(gulp.dest('public/fonts'));
 });
 

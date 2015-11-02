@@ -13,8 +13,10 @@ const LiquorMaps = React.createClass({
     const svg = d3.select('.default-svg-container.liquor-map svg');
     const scaleRatio = width < height ? 50 : 92.43;
     const scale = height * scaleRatio;
-    const textName = svg.append('text');
-    const textDate = svg.append('text');
+    const textG = svg.append('g');
+    const textName = textG.append('text');
+    const textDate = textG.append('text');
+    textG.attr('class', 'text-group')
     let textY;
     let textX;
     let fontSize;
