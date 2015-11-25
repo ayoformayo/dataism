@@ -21,17 +21,18 @@ const LiquorMaps = React.createClass({
     let textX;
     let fontSize;
     let textAnchor = 'left';
-    if(width <= 768){
+    if(width <= height){
       textAnchor = 'middle';
       textX = width * 0.5;
       fontSize = '32px';
-      textY = height - 200;
+      textY = height - (height * 0.2);
     }else {
       textAnchor = 'left';
       textX = width * 0.1;
       textY = 100;
       fontSize = '30px';
     }
+    if(width < 768) fontSize = '14px';
     textName.text('Places to Get a Drink')
         .attr('fill', 'white')
         .attr('text-anchor', textAnchor)
