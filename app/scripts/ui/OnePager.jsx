@@ -37,6 +37,15 @@ var PAGES = [
       component: require('./sankey.jsx')
     }
   ],
+  [
+    {
+      displayName: 'Nicks an alcoholic',
+      displayText: 'How is nick ruining his life',
+      name: 'nicksBeers',
+      anchor: '#nicks_beers',
+      component: require('./NicksBeers.jsx')
+    }
+  ]
 ];
 var Router = require('react-router');
 
