@@ -66,14 +66,14 @@ class WhoScoredScraper
       @stats = JSON.parse(File.open("main_stats.json").read)
     end
   end
-  def scrape_basic_shit(cat, subcat, i)
+  def scrape_basic_shit(cat, subcat, i, type_i)
     while i <= 261 do
-      raise "eeeeeeee" if i == 5
+      # raise "eeeeeeee" if i == 5
       p "cat-#{cat}, subcat-#{subcat}, i-#{i}"
-      response = `curl "https://www.whoscored.com/StatisticsFeed/1/GetPlayerStatistics?category=#{cat}&subcategory=#{subcat}&statsAccumulationType=2&isCurrent=true&playerId=&teamIds=&matchId=&stageId=&tournamentOptions=2,3,4,5,22&sortBy=Rating&sortAscending=&age=&ageComparisonType=&appearances=&appearancesComparisonType=&field=Overall&nationality=&positionOptions=&timeOfTheGameEnd=&timeOfTheGameStart=&isMinApp=true&page=#{i}&includeZeroValues=&numberOfPlayersToPick=10" -H 'Cookie: _gat=1; _ga=GA1.2.1155899746.1455997580' -H 'Accept-Encoding: gzip, deflate, sdch' -H 'Accept-Language: en-US,en;q=0.8,it;q=0.6' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36' -H 'Accept: application/json, text/javascript, */*; q=0.01' -H 'Referer: https://www.whoscored.com/Statistics' -H 'Model-Last-Mode: #{@model_last_mode}' -H 'X-Requested-With: XMLHttpRequest' -H 'Connection: keep-alive' -H 'Cache-Control: max-age=0' --compressed`
-      raise_error if response.nil?
-      parsed = JSON.parse(response)
-      @stats << parsed["playerTableStats"]
+      # response = `curl "https://www.whoscored.com/StatisticsFeed/1/GetPlayerStatistics?category=#{cat}&subcategory=#{subcat}&statsAccumulationType=2&isCurrent=true&playerId=&teamIds=&matchId=&stageId=&tournamentOptions=2,3,4,5,22&sortBy=Rating&sortAscending=&age=&ageComparisonType=&appearances=&appearancesComparisonType=&field=Overall&nationality=&positionOptions=&timeOfTheGameEnd=&timeOfTheGameStart=&isMinApp=true&page=#{i}&includeZeroValues=&numberOfPlayersToPick=10" -H 'Cookie: _gat=1; _ga=GA1.2.1155899746.1455997580' -H 'Accept-Encoding: gzip, deflate, sdch' -H 'Accept-Language: en-US,en;q=0.8,it;q=0.6' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36' -H 'Accept: application/json, text/javascript, */*; q=0.01' -H 'Referer: https://www.whoscored.com/Statistics' -H 'Model-Last-Mode: #{@model_last_mode}' -H 'X-Requested-With: XMLHttpRequest' -H 'Connection: keep-alive' -H 'Cache-Control: max-age=0' --compressed`
+      # raise_error if response.nil?
+      # parsed = JSON.parse(response)
+      # @stats << parsed["playerTableStats"]
       File.open("main_stats.json","w") do |f|
         f.write(JSON.pretty_generate((@stats.flatten)))
       end
@@ -93,6 +93,7 @@ class WhoScoredScraper
       @last_category = cat
       @last_subcategory = subcat
       @last_iteration = i
+      @last_type = @typology[type_i]["type"]
 
       p "not fucking up"
     end
@@ -102,7 +103,7 @@ class WhoScoredScraper
   def start_the_party
     begin
       time_now = Time.now.to_i
-      set_model_last_mode
+      # set_model_last_mode
       (@last_type_id..(@typology.length-1)).each do |type_i|
         (@last_category_id..(@typology[type_i]["categories"].length - 1)).each do |category_id|
           category = @typology[type_i]["categories"][category_id]
@@ -110,10 +111,10 @@ class WhoScoredScraper
             cat = category["name"]
             subcategory = category["subcategories"][subcat]
             if @start_from_last
-              scrape_basic_shit(cat, subcategory, @last_iteration + 1)
+              scrape_basic_shit(cat, subcategory, @last_iteration + 1, type_i)
               @start_from_last = false
             else
-              scrape_basic_shit(cat, subcategory, 1)
+              scrape_basic_shit(cat, subcategory, 1, type_i)
             end
           end
         end
@@ -128,8 +129,8 @@ class WhoScoredScraper
       p "fucking up"
       @total_fuck_ups -= 1
       if @total_fuck_ups == 0
-        sleep 300
-        set_model_last_mode
+        # sleep 300
+        # set_model_last_mode
         @total_fuck_ups = 5
         @reconnections -= 1
       end
