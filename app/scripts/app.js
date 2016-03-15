@@ -13,10 +13,12 @@ var LiquorMap = require("./ui/liquor_maps.jsx"),
     Sankey = require("./ui/sankey.jsx"),
     mountNode = document.getElementById("app"),
     DefaultLayout = require("./ui/layout.jsx"),
+    SoccerViz = require("./ui/SoccerViz.jsx"),
     OnePager = require("./ui/OnePager.jsx");
 
 var routes = (
   <Route handler={DefaultLayout}>
+    <Route name='soccer' path="/soccer" handler={SoccerViz}/>
     <Route name='activity-feed' path="/?:slug?" handler={OnePager}/>
   </Route>
 );
@@ -24,4 +26,3 @@ var routes = (
 Router.run(routes, Router.HistoryLocation, (Root) => {
   React.render(<Root/>, document.getElementById("app"));
 });
-

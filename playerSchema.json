@@ -1,0 +1,120 @@
+[
+  {
+    "categories": [
+      {
+        "subcategories": [
+          "success"
+        ],
+        "name": "tackles"
+      },
+      {
+        "subcategories": [
+          "success"
+        ],
+        "name": "interception"
+      },
+      {
+        "subcategories": [
+          "type"
+        ],
+        "name": "fouls"
+      },
+      {
+        "subcategories": [
+          "type"
+        ],
+        "name": "cards"
+      },
+      {
+        "subcategories": [
+          "type"
+        ],
+        "name": "offsides"
+      },
+      {
+        "subcategories": [
+          "success"
+        ],
+        "name": "clearances"
+      },
+      {
+        "subcategories": [
+          "type"
+        ],
+        "name": "blocks"
+      },
+      {
+        "subcategories": [
+          "shotzone"
+        ],
+        "name": "saves"
+      }
+    ],
+    "type": "Defensive"
+  },
+  {
+    "categories": [
+      {
+        "subcategories": [
+          "zones",
+          "situations",
+          "accuracy",
+          "bodyparts"
+        ],
+        "name": "shots"
+      },
+      {
+        "subcategories": [
+          "zones",
+          "situations",
+          "bodyparts"
+        ],
+        "name": "goals"
+      },
+      {
+        "subcategories": [
+          "success"
+        ],
+        "name": "dribbles"
+      },
+      {
+        "subcategories": [
+          "type"
+        ],
+        "name": "possession-loss"
+      },
+      {
+        "subcategories": [
+          "success"
+        ],
+        "name": "aerial"
+      }
+    ],
+    "type": "Offensive"
+  },
+  {
+    "categories": [
+      {
+        "subcategories": [
+          "length",
+          "type"
+        ],
+        "name": "passes"
+      },
+      {
+        "subcategories": [
+          "length",
+          "type"
+        ],
+        "name": "key-passes"
+      },
+      {
+        "subcategories": [
+          "type"
+        ],
+        "name": "assists"
+      }
+    ],
+    "type": "Passing"
+  }
+]
